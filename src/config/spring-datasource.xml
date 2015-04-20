@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop.xsd
+                    http://www.springframework.org/schema/tx
+                    http://www.springframework.org/schema/tx/spring-tx.xsd">
+      
+      <!-- 属性文件 --> 
+      <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+            p:location="classpath:config/jdbc.properties"
+            p:fileEncoding="utf-8"/>
+      
+      <!--      
+       <bean class="com.juzhituan.util.EncryptPropertyPalceholderConfigurer"
+            p:location="classpath:config/jdbc.properties"
+            p:fileEncoding="utf-8"/>
+            -->  
+      <!-- 配置数据源 -->
+      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		  <property name="driverClass" value="${driverClassName}"/>
+		  <property name="jdbcUrl" value="${url}"/>
+		  <property name="user" value="${userName}"/>
+		  <property name="password" value="${password}"/>
+          <property name="initialPoolSize" value="${initialPoolSize}"/>  
+          <property name="minPoolSize" value="${minPoolSize}"/>
+          <property name="maxPoolSize" value="${maxPoolSize}"/>  
+          <property name="maxIdleTime" value="${maxIdleTime}"/>    
+          <property name="acquireIncrement" value="${acquireIncrement}"/>  
+          <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>  
+          <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+          <property name="autoCommitOnClose"    value="${autoCommitOnClose}"/>    
+          <property name="breakAfterAcquireFailure" value="${breakAfterAcquireFailure}"/>  
+    </bean>
+	<!-- 配置会话工厂 -->
+	<bean id="sessionFactory" 
+	      class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+	      p:dataSource-ref="dataSource"
+	      p:configLocation="classpath:config/hibernate.cfg.xml"
+	/>
+	      
+	 <!-- 配置缓存池 -->
+	      
+     <!-- 配置事务管理器 -->
+    <bean id="transactionManager" 
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory"
+    />
+     <!-- 将事务控制代码转换成Advice,读取操作为只读事务 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="load*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+         
+    <!-- 指定在那个位置，织入那个Advice -->
+    <aop:config>
+       <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.triman.zhongshitong.service.*.*(..))"/>
+    </aop:config>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
