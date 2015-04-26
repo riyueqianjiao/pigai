@@ -1,6 +1,7 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,35 +24,35 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_course", catalog = "pigai")
+@Table(name = "course", catalog = "pigai")
 public class Course implements java.io.Serializable {
 
 	private Integer courseId;
-	private Teacher Teacher;
+	private Teacher teacher;
 	private String couserName;
 	private String courseIntr;
-	private Set<Homework> Homeworks = new HashSet<Homework>(0);
-	private Set<Courseware> Coursewares = new HashSet<Courseware>(0);
-	private Set<Selectcourse> Selectcourses = new HashSet<Selectcourse>(0);
+	private Set<Homework> homeworks = new HashSet<Homework>(0);
+	private Set<Courseware> coursewares = new HashSet<Courseware>(0);
+	private Set<Selectcourse> selectcourses = new HashSet<Selectcourse>(0);
 
 	public Course() {
 	}
 
-	public Course(Teacher Teacher, String couserName, String courseIntr) {
-		this.Teacher = Teacher;
+	public Course(Teacher teacher, String couserName, String courseIntr) {
+		this.teacher = teacher;
 		this.couserName = couserName;
 		this.courseIntr = courseIntr;
 	}
 
-	public Course(Teacher Teacher, String couserName, String courseIntr,
-			Set<Homework> Homeworks, Set<Courseware> Coursewares,
-			Set<Selectcourse> Selectcourses) {
-		this.Teacher = Teacher;
+	public Course(Teacher teacher, String couserName, String courseIntr,
+			Set<Homework> homeworks, Set<Courseware> coursewares,
+			Set<Selectcourse> selectcourses) {
+		this.teacher = teacher;
 		this.couserName = couserName;
 		this.courseIntr = courseIntr;
-		this.Homeworks = Homeworks;
-		this.Coursewares = Coursewares;
-		this.Selectcourses = Selectcourses;
+		this.homeworks = homeworks;
+		this.coursewares = coursewares;
+		this.selectcourses = selectcourses;
 	}
 
 	@Id
@@ -68,11 +69,11 @@ public class Course implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacherId", nullable = false)
 	public Teacher getTeacher() {
-		return this.Teacher;
+		return this.teacher;
 	}
 
-	public void setTeacher(Teacher Teacher) {
-		this.Teacher = Teacher;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 	@Column(name = "couserName", nullable = false)
@@ -93,31 +94,31 @@ public class Course implements java.io.Serializable {
 		this.courseIntr = courseIntr;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Course")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
 	public Set<Homework> getHomeworks() {
-		return this.Homeworks;
+		return this.homeworks;
 	}
 
-	public void setHomeworks(Set<Homework> Homeworks) {
-		this.Homeworks = Homeworks;
+	public void setHomeworks(Set<Homework> homeworks) {
+		this.homeworks = homeworks;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Course")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
 	public Set<Courseware> getCoursewares() {
-		return this.Coursewares;
+		return this.coursewares;
 	}
 
-	public void setCoursewares(Set<Courseware> Coursewares) {
-		this.Coursewares = Coursewares;
+	public void setCoursewares(Set<Courseware> coursewares) {
+		this.coursewares = coursewares;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Course")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
 	public Set<Selectcourse> getSelectcourses() {
-		return this.Selectcourses;
+		return this.selectcourses;
 	}
 
-	public void setSelectcourses(Set<Selectcourse> TSelectcourses) {
-		this.Selectcourses = TSelectcourses;
+	public void setSelectcourses(Set<Selectcourse> selectcourses) {
+		this.selectcourses = selectcourses;
 	}
 
 }

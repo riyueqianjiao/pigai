@@ -1,12 +1,15 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,23 +20,23 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_courseware", catalog = "pigai")
+@Table(name = "courseware", catalog = "pigai")
 public class Courseware implements java.io.Serializable {
 
 	private Integer coursewareId;
-	private Course Course;
-	private File File;
+	private Course course;
+	private File file;
 
 	public Courseware() {
 	}
 
-	public Courseware(Course Course, File File) {
-		this.Course = Course;
-		this.File = File;
+	public Courseware(Course course, File file) {
+		this.course = course;
+		this.file = file;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "coursewareId", unique = true, nullable = false)
 	public Integer getCoursewareId() {
 		return this.coursewareId;
@@ -45,22 +48,22 @@ public class Courseware implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseId", nullable = false)
-	public Course getTCourse() {
-		return this.Course;
+	public Course getCourse() {
+		return this.course;
 	}
 
-	public void setTCourse(Course Course) {
-		this.Course = Course;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fileId", nullable = false)
-	public File getTFile() {
-		return this.File;
+	public File getFile() {
+		return this.file;
 	}
 
-	public void setTFile(File File) {
-		this.File = File;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 }

@@ -1,11 +1,14 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,7 +17,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_manager", catalog = "pigai")
+@Table(name = "manager", catalog = "pigai")
 public class Manager implements java.io.Serializable {
 
 	private Integer managerId;
@@ -30,13 +33,13 @@ public class Manager implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "managerId", unique = true, nullable = false)
-	public Integer geManagerId() {
+	public Integer getManagerId() {
 		return this.managerId;
 	}
 
-	public void seManagerId(Integer managerId) {
+	public void setManagerId(Integer managerId) {
 		this.managerId = managerId;
 	}
 

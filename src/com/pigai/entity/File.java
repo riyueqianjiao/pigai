@@ -1,6 +1,7 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +22,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_file", catalog = "pigai")
+@Table(name = "file", catalog = "pigai")
 public class File implements java.io.Serializable {
 
 	private Integer fileId;
@@ -27,8 +30,8 @@ public class File implements java.io.Serializable {
 	private String filePath;
 	private Double fileSize;
 	private String fileType;
-	private Set<Courseware> Coursewares = new HashSet<Courseware>(0);
-	private Set<Submitrecord> Submitrecords = new HashSet<Submitrecord>(0);
+	private Set<Courseware> coursewares = new HashSet<Courseware>(0);
+	private Set<Submitrecord> submitrecords = new HashSet<Submitrecord>(0);
 
 	public File() {
 	}
@@ -39,79 +42,79 @@ public class File implements java.io.Serializable {
 	}
 
 	public File(String fileName, String filePath, Double fileSize,
-			String fileType, Set<Courseware> Coursewares,
-			Set<Submitrecord> Submitrecords) {
+			String fileType, Set<Courseware> coursewares,
+			Set<Submitrecord> submitrecords) {
 		this.fileName = fileName;
 		this.filePath = filePath;
 		this.fileSize = fileSize;
 		this.fileType = fileType;
-		this.Coursewares = Coursewares;
-		this.Submitrecords = Submitrecords;
+		this.coursewares = coursewares;
+		this.submitrecords = submitrecords;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "fileId", unique = true, nullable = false)
-	public Integer geFileId() {
+	public Integer getFileId() {
 		return this.fileId;
 	}
 
-	public void seFileId(Integer fileId) {
+	public void setFileId(Integer fileId) {
 		this.fileId = fileId;
 	}
 
 	@Column(name = "fileName", nullable = false)
-	public String geFileName() {
+	public String getFileName() {
 		return this.fileName;
 	}
 
-	public void seFileName(String fileName) {
+	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
 	@Column(name = "filePath", nullable = false)
-	public String geFilePath() {
+	public String getFilePath() {
 		return this.filePath;
 	}
 
-	public void seFilePath(String filePath) {
+	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
 
 	@Column(name = "fileSize", precision = 22, scale = 0)
-	public Double geFileSize() {
+	public Double getFileSize() {
 		return this.fileSize;
 	}
 
-	public void seFileSize(Double fileSize) {
+	public void setFileSize(Double fileSize) {
 		this.fileSize = fileSize;
 	}
 
 	@Column(name = "fileType")
-	public String geFileType() {
+	public String getFileType() {
 		return this.fileType;
 	}
 
-	public void seFileType(String fileType) {
+	public void setFileType(String fileType) {
 		this.fileType = fileType;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "File")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "file")
 	public Set<Courseware> getCoursewares() {
-		return this.Coursewares;
+		return this.coursewares;
 	}
 
-	public void setCoursewares(Set<Courseware> Coursewares) {
-		this.Coursewares = Coursewares;
+	public void setCoursewares(Set<Courseware> coursewares) {
+		this.coursewares = coursewares;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "File")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "file")
 	public Set<Submitrecord> getSubmitrecords() {
-		return this.Submitrecords;
+		return this.submitrecords;
 	}
 
-	public void setSubmitrecords(Set<Submitrecord> Submitrecords) {
-		this.Submitrecords = Submitrecords;
+	public void setSubmitrecords(Set<Submitrecord> submitrecords) {
+		this.submitrecords = submitrecords;
 	}
 
 }

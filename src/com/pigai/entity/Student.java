@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,8 +9,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,25 +18,24 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_student", catalog = "pigai")
+@Table(name = "student", catalog = "pigai")
 public class Student implements java.io.Serializable {
 
-	private Integer studentId;
-	private int studentNo;
+	private String studentId;
 	private String name;
 	private String school;
 	private String college;
 	private String username;
 	private String password;
-	private Set<Submitrecord> Submitrecords = new HashSet<Submitrecord>(0);
-	private Set<Selectcourse> Selectcourses = new HashSet<Selectcourse>(0);
+	private Set<Selectcourse> selectcourses = new HashSet<Selectcourse>(0);
+	private Set<Submitrecord> submitrecords = new HashSet<Submitrecord>(0);
 
 	public Student() {
 	}
 
-	public Student(int studentNo, String name, String school, String college,
-			String username, String password) {
-		this.studentNo = studentNo;
+	public Student(String studentId, String name, String school,
+			String college, String username, String password) {
+		this.studentId = studentId;
 		this.name = name;
 		this.school = school;
 		this.college = college;
@@ -46,40 +43,30 @@ public class Student implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Student(int studentNo, String name, String school, String college,
-			String username, String password,
-			Set<Submitrecord> Submitrecords, Set<Selectcourse> Selectcourses) {
-		this.studentNo = studentNo;
+	public Student(String studentId, String name, String school,
+			String college, String username, String password,
+			Set<Selectcourse> selectcourses, Set<Submitrecord> submitrecords) {
+		this.studentId = studentId;
 		this.name = name;
 		this.school = school;
 		this.college = college;
 		this.username = username;
 		this.password = password;
-		this.Submitrecords = Submitrecords;
-		this.Selectcourses = Selectcourses;
+		this.selectcourses = selectcourses;
+		this.submitrecords = submitrecords;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "studentId", unique = true, nullable = false)
-	public Integer geStudentId() {
+	@Column(name = "studentId", unique = true, nullable = false, length = 50)
+	public String getStudentId() {
 		return this.studentId;
 	}
 
-	public void seStudentId(Integer studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 
-	@Column(name = "studentNo", nullable = false)
-	public int geStudentNo() {
-		return this.studentNo;
-	}
-
-	public void seStudentNo(int studentNo) {
-		this.studentNo = studentNo;
-	}
-
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, length = 50)
 	public String getName() {
 		return this.name;
 	}
@@ -88,7 +75,7 @@ public class Student implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "school", nullable = false)
+	@Column(name = "school", nullable = false, length = 50)
 	public String getSchool() {
 		return this.school;
 	}
@@ -97,7 +84,7 @@ public class Student implements java.io.Serializable {
 		this.school = school;
 	}
 
-	@Column(name = "college", nullable = false)
+	@Column(name = "college", nullable = false, length = 50)
 	public String getCollege() {
 		return this.college;
 	}
@@ -106,7 +93,7 @@ public class Student implements java.io.Serializable {
 		this.college = college;
 	}
 
-	@Column(name = "username", nullable = false)
+	@Column(name = "username", nullable = false, length = 50)
 	public String getUsername() {
 		return this.username;
 	}
@@ -115,7 +102,7 @@ public class Student implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = false, length = 50)
 	public String getPassword() {
 		return this.password;
 	}
@@ -124,22 +111,22 @@ public class Student implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
-	public Set<Submitrecord> geSubmitrecords() {
-		return this.Submitrecords;
-	}
-
-	public void seSubmitrecords(Set<Submitrecord> Submitrecords) {
-		this.Submitrecords = Submitrecords;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Student")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
 	public Set<Selectcourse> getSelectcourses() {
-		return this.Selectcourses;
+		return this.selectcourses;
 	}
 
-	public void setSelectcourses(Set<Selectcourse> Selectcourses) {
-		this.Selectcourses = Selectcourses;
+	public void setSelectcourses(Set<Selectcourse> selectcourses) {
+		this.selectcourses = selectcourses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+	public Set<Submitrecord> getSubmitrecords() {
+		return this.submitrecords;
+	}
+
+	public void setSubmitrecords(Set<Submitrecord> submitrecords) {
+		this.submitrecords = submitrecords;
 	}
 
 }

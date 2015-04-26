@@ -1,6 +1,7 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,51 +24,54 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_homework", catalog = "pigai")
+@Table(name = "homework", catalog = "pigai")
 public class Homework implements java.io.Serializable {
 
 	private Integer homeworkId;
-	private Course Course;
+	private Course course;
 	private String name;
 	private String introduction;
-	private Set<Submitrecord> Submitrecords = new HashSet<Submitrecord>(0);
+	private int score;
+	private Set<Submitrecord> submitrecords = new HashSet<Submitrecord>(0);
 
 	public Homework() {
 	}
 
-	public Homework(Course Course, String name, String introduction) {
-		this.Course = Course;
+	public Homework(Course course, String name, String introduction, int score) {
+		this.course = course;
 		this.name = name;
 		this.introduction = introduction;
+		this.score = score;
 	}
 
-	public Homework(Course Course, String name, String introduction,
-			Set<Submitrecord> Submitrecords) {
-		this.Course = Course;
+	public Homework(Course course, String name, String introduction, int score,
+			Set<Submitrecord> submitrecords) {
+		this.course = course;
 		this.name = name;
 		this.introduction = introduction;
-		this.Submitrecords = Submitrecords;
+		this.score = score;
+		this.submitrecords = submitrecords;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "homeworkId", unique = true, nullable = false)
-	public Integer geHomeworkId() {
+	public Integer getHomeworkId() {
 		return this.homeworkId;
 	}
 
-	public void seHomeworkId(Integer homeworkId) {
+	public void setHomeworkId(Integer homeworkId) {
 		this.homeworkId = homeworkId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseId", nullable = false)
 	public Course getCourse() {
-		return this.Course;
+		return this.course;
 	}
 
-	public void setCourse(Course Course) {
-		this.Course = Course;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@Column(name = "name", nullable = false)
@@ -86,13 +92,22 @@ public class Homework implements java.io.Serializable {
 		this.introduction = introduction;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Homework")
-	public Set<Submitrecord> getSubmitrecords() {
-		return this.Submitrecords;
+	@Column(name = "score", nullable = false)
+	public int getScore() {
+		return this.score;
 	}
 
-	public void setSubmitrecords(Set<Submitrecord> Submitrecords) {
-		this.Submitrecords = Submitrecords;
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "homework")
+	public Set<Submitrecord> getSubmitrecords() {
+		return this.submitrecords;
+	}
+
+	public void setSubmitrecords(Set<Submitrecord> submitrecords) {
+		this.submitrecords = submitrecords;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -10,7 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +23,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="t_teacher",catalog="pigai")
+@Table(name="teacher",catalog="pigai")
 public class Teacher  implements java.io.Serializable {
 
 
@@ -30,8 +33,9 @@ public class Teacher  implements java.io.Serializable {
      private String college;
      private String password;
      private String email;
-     private String telephone;
-     private Set<Course> Courses = new HashSet<Course>(0);
+     private String 
+telephone;
+     private Set<Course> courses = new HashSet<Course>(0);
 
     public Teacher() {
     }
@@ -44,24 +48,24 @@ public class Teacher  implements java.io.Serializable {
         this.password = password;
     }
     public Teacher(String name, String school, String college, String password, String email, String 
-telephone, Set<Course> Courses) {
+telephone, Set<Course> courses) {
        this.name = name;
        this.school = school;
        this.college = college;
        this.password = password;
        this.email = email;
        this.telephone = telephone;
-       this.Courses = Courses;
+       this.courses = courses;
     }
    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)    
+    @GeneratedValue(strategy=IDENTITY)   
     @Column(name="teacherId", unique=true, nullable=false)
-    public Integer geTeacherId() {
+    public Integer getTeacherId() {
         return this.teacherId;
     }
     
-    public void seTeacherId(Integer teacherId) {
+    public void setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
     }
 
@@ -125,13 +129,13 @@ telephone, Set<Course> Courses) {
         this.telephone = telephone;
     }
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="Teacher")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="teacher")
     public Set<Course> getCourses() {
-        return this.Courses;
+        return this.courses;
     }
     
-    public void setCourses(Set<Course> Courses) {
-        this.Courses = Courses;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 
 

@@ -1,12 +1,15 @@
 package com.pigai.entity;
+
 // default package
-// Generated 2015-4-17 0:44:39 by Hibernate Tools 4.3.1
+// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,25 +20,27 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_submitrecord", catalog = "pigai")
+@Table(name = "submitrecord", catalog = "pigai")
 public class Submitrecord implements java.io.Serializable {
 
 	private Integer submitId;
-	private File File;
-	private Homework Homework;
-	private Student Student;
+	private File file;
+	private Homework homework;
+	private Student student;
+	private int score;
 
 	public Submitrecord() {
 	}
 
-	public Submitrecord(File File, Homework Homework, Student Student) {
-		this.File = File;
-		this.Homework = Homework;
-		this.Student = Student;
+	public Submitrecord(File file, Homework homework, Student student, int score) {
+		this.file = file;
+		this.homework = homework;
+		this.student = student;
+		this.score = score;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "submitId", unique = true, nullable = false)
 	public Integer getSubmitId() {
 		return this.submitId;
@@ -48,31 +53,40 @@ public class Submitrecord implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fileId", nullable = false)
 	public File getFile() {
-		return this.File;
+		return this.file;
 	}
 
-	public void setFile(File File) {
-		this.File = File;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "homeworkId", nullable = false)
 	public Homework getHomework() {
-		return this.Homework;
+		return this.homework;
 	}
 
-	public void setHomework(Homework Homework) {
-		this.Homework = Homework;
+	public void setHomework(Homework homework) {
+		this.homework = homework;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "studentId", nullable = false)
 	public Student getStudent() {
-		return this.Student;
+		return this.student;
 	}
 
-	public void setStudent(Student Student) {
-		this.Student = Student;
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	@Column(name = "score", nullable = false)
+	public int getScore() {
+		return this.score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }
