@@ -16,11 +16,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
             p:location="classpath:config/jdbc.properties"
             p:fileEncoding="utf-8"/>
       
-      <!--      
-       <bean class="com.juzhituan.util.EncryptPropertyPalceholderConfigurer"
-            p:location="classpath:config/jdbc.properties"
-            p:fileEncoding="utf-8"/>
-            -->  
+
       <!-- 配置数据源 -->
       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		  <property name="driverClass" value="${driverClassName}"/>
@@ -64,7 +60,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
          
     <!-- 指定在那个位置，织入那个Advice -->
     <aop:config>
-       <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.triman.zhongshitong.service.*.*(..))"/>
+       <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.pigai.service.*.*(..))"/>
     </aop:config>
     
 </beans>

@@ -40,7 +40,7 @@
     	overflowToDisk="false" />
     	
 
-    <cache name="com.triman.zhongshitong.po.User"
+    <cache name="com.pigai.entity.Student"
            maxElementsInMemory="100"
            eternal="false"
            timeToIdleSeconds="120"
