@@ -12,7 +12,7 @@ public class CheckUtil
 		boolean isEmpty = false;
         if (obj instanceof String) 
         {
-            if(null == obj || ("").equals(((String) obj).trim()))
+            if(null == obj || ((String)obj).isEmpty())
             	isEmpty = true;         
         }
         else

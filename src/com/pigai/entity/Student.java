@@ -25,7 +25,6 @@ public class Student implements java.io.Serializable {
 	private String name;
 	private String school;
 	private String college;
-	private String username;
 	private String password;
 	private Set<Selectcourse> selectcourses = new HashSet<Selectcourse>(0);
 	private Set<Submitrecord> submitrecords = new HashSet<Submitrecord>(0);
@@ -34,23 +33,21 @@ public class Student implements java.io.Serializable {
 	}
 
 	public Student(String studentId, String name, String school,
-			String college, String username, String password) {
+			String college,  String password) {
 		this.studentId = studentId;
 		this.name = name;
 		this.school = school;
 		this.college = college;
-		this.username = username;
 		this.password = password;
 	}
 
 	public Student(String studentId, String name, String school,
-			String college, String username, String password,
+			String college,  String password,
 			Set<Selectcourse> selectcourses, Set<Submitrecord> submitrecords) {
 		this.studentId = studentId;
 		this.name = name;
 		this.school = school;
 		this.college = college;
-		this.username = username;
 		this.password = password;
 		this.selectcourses = selectcourses;
 		this.submitrecords = submitrecords;
@@ -91,15 +88,6 @@ public class Student implements java.io.Serializable {
 
 	public void setCollege(String college) {
 		this.college = college;
-	}
-
-	@Column(name = "username", nullable = false, length = 50)
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	@Column(name = "password", nullable = false, length = 50)

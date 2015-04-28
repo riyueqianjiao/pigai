@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <jsp:forward page="/WEB-INF/view/login.jsp"/>
+<%--     <jsp:forward page="/WEB-INF/view/student/login.jsp"/>   --%>
+<%
+  response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+  String newLocn = "student/login";
+  response.setHeader("Location",newLocn);
+%>
 </body>
 </html>

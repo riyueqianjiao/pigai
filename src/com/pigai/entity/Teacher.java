@@ -27,7 +27,7 @@ import javax.persistence.Table;
 public class Teacher  implements java.io.Serializable {
 
 
-     private Integer teacherId;
+     private String teacherId;
      private String name;
      private String school;
      private String college;
@@ -61,11 +61,11 @@ telephone, Set<Course> courses) {
     @Id
     @GeneratedValue(strategy=IDENTITY)   
     @Column(name="teacherId", unique=true, nullable=false)
-    public Integer getTeacherId() {
+    public String getTeacherId() {
         return this.teacherId;
     }
     
-    public void setTeacherId(Integer teacherId) {
+    public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
 
