@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,32 +23,35 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="teacher",catalog="pigai")
+@Table(name="teacher",catalog="pigai"
+)
 public class Teacher  implements java.io.Serializable {
 
 
-     private String teacherId;
+     private Integer teacherId;
+     private String teacherNo;
      private String name;
      private String school;
      private String college;
      private String password;
      private String email;
-     private String 
-telephone;
+     private String telephone;
      private Set<Course> courses = new HashSet<Course>(0);
 
     public Teacher() {
     }
 
 	
-    public Teacher(String name, String school, String college, String password) {
+    public Teacher(String teacherNo, String name, String school, String college, String password) {
+        this.teacherNo = teacherNo;
         this.name = name;
         this.school = school;
         this.college = college;
         this.password = password;
     }
-    public Teacher(String name, String school, String college, String password, String email, String 
+    public Teacher(String teacherNo, String name, String school, String college, String password, String email, String 
 telephone, Set<Course> courses) {
+       this.teacherNo = teacherNo;
        this.name = name;
        this.school = school;
        this.college = college;
@@ -58,19 +61,30 @@ telephone, Set<Course> courses) {
        this.courses = courses;
     }
    
-    @Id
-    @GeneratedValue(strategy=IDENTITY)   
+     @Id @GeneratedValue(strategy=IDENTITY)
+
+    
     @Column(name="teacherId", unique=true, nullable=false)
-    public String getTeacherId() {
+    public Integer getTeacherId() {
         return this.teacherId;
     }
     
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
     }
 
     
-    @Column(name="name", nullable=false)
+    @Column(name="teacherNo", nullable=false, length=50)
+    public String getTeacherNo() {
+        return this.teacherNo;
+    }
+    
+    public void setTeacherNo(String teacherNo) {
+        this.teacherNo = teacherNo;
+    }
+
+    
+    @Column(name="name", nullable=false, length=50)
     public String getName() {
         return this.name;
     }
@@ -80,7 +94,7 @@ telephone, Set<Course> courses) {
     }
 
     
-    @Column(name="school", nullable=false)
+    @Column(name="school", nullable=false, length=50)
     public String getSchool() {
         return this.school;
     }
@@ -90,7 +104,7 @@ telephone, Set<Course> courses) {
     }
 
     
-    @Column(name="college", nullable=false)
+    @Column(name="college", nullable=false, length=50)
     public String getCollege() {
         return this.college;
     }
@@ -100,7 +114,7 @@ telephone, Set<Course> courses) {
     }
 
     
-    @Column(name="password", nullable=false)
+    @Column(name="password", nullable=false, length=50)
     public String getPassword() {
         return this.password;
     }
@@ -110,7 +124,7 @@ telephone, Set<Course> courses) {
     }
 
     
-    @Column(name="email")
+    @Column(name="email", length=50)
     public String getEmail() {
         return this.email;
     }
@@ -120,7 +134,7 @@ telephone, Set<Course> courses) {
     }
 
     
-    @Column(name="telephone")
+    @Column(name="telephone", length=50)
     public String gettelephone() {
         return this.telephone;
     }
@@ -129,7 +143,7 @@ telephone, Set<Course> courses) {
         this.telephone = telephone;
     }
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="teacher")
+@OneToMany(fetch=FetchType.LAZY, mappedBy="teacher")
     public Set<Course> getCourses() {
         return this.courses;
     }

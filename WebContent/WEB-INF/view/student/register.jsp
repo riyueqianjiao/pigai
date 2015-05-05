@@ -15,7 +15,7 @@
                 <label>学号:</label> 
             </td> 
             <td> 
-                <input id="studentId" type="text" size="20" /> 
+                <input id="studentNo" type="text" size="20" /> 
             </td> 
         </tr> 
         <tr> 
@@ -69,13 +69,13 @@
 <script type="text/javascript">
 $().ready(function () {
 	$('#register').click(function () {
-		var studentId = $('#studentId').val();
+		var studentNo = $('#studentNo').val();
 		var name = $('#name').val();
 		var school = $('#school').val();
 		var college = $('#college').val();
 		var password = $('#password').val();
 		var password_again = $('#password_again').val();
-		if (studentId == "") {			
+		if (studentNo == "") {			
 			alert("学号不能为空！");
 		}else if(name == ""){
 			alert("姓名不能为空！");
@@ -91,7 +91,7 @@ $().ready(function () {
 			alert("两次密码不符");
 		}
 		else {
-			var data = {"studentId":studentId,"name":name,"school":school,"college":college,"password":password};
+			var data = {"studentNo":studentNo,"name":name,"school":school,"college":college,"password":password};
 			$.ajax({
 				type: "post",
 				url: "register",

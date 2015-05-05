@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2015-04-28 22:53:45
+Date: 2015-05-05 22:48:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,17 +21,21 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `courseId` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `couserName` varchar(50) NOT NULL,
-  `courseIntr` varchar(50) NOT NULL,
-  `teacherId` varchar(50) NOT NULL,
+  `courseName` varchar(50) NOT NULL,
+  `courseIntr` varchar(50) DEFAULT NULL,
+  `teacherId` int(11) unsigned zerofill NOT NULL,
+  `time` datetime NOT NULL,
+  `teacherName` varchar(50) NOT NULL,
   PRIMARY KEY (`courseId`),
   KEY `course_teacherId` (`teacherId`),
   CONSTRAINT `course_teacherId` FOREIGN KEY (`teacherId`) REFERENCES `teacher` (`teacherId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
+INSERT INTO `course` VALUES ('00000000001', '数据挖掘', '数据挖掘', '00000000001', '2015-04-30 10:15:50', '乐嘉锦');
+INSERT INTO `course` VALUES ('00000000002', '大数据', '大数据', '00000000001', '2015-04-30 15:58:38', '乐嘉锦');
 
 -- ----------------------------
 -- Table structure for courseware
@@ -79,6 +83,8 @@ CREATE TABLE `homework` (
   `introduction` varchar(50) NOT NULL,
   `courseId` int(11) unsigned zerofill NOT NULL,
   `score` int(11) NOT NULL DEFAULT '0',
+  `deadline` datetime NOT NULL,
+  `createtime` datetime NOT NULL,
   PRIMARY KEY (`homeworkId`),
   KEY `homework_courseId` (`courseId`),
   CONSTRAINT `homework_courseId` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -108,15 +114,15 @@ CREATE TABLE `manager` (
 -- ----------------------------
 DROP TABLE IF EXISTS `selectcourse`;
 CREATE TABLE `selectcourse` (
-  `selectId` int(32) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `courseId` int(32) unsigned zerofill NOT NULL,
-  `studentId` varchar(50) NOT NULL,
+  `selectId` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `courseId` int(11) unsigned zerofill NOT NULL,
+  `studentId` int(11) unsigned zerofill NOT NULL,
   `grade` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`selectId`),
   KEY `select_courseId` (`courseId`),
   KEY `select_studentId` (`studentId`),
-  CONSTRAINT `select_courseId` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `select_studentId` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `select_studentId` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `select_courseId` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -128,19 +134,21 @@ CREATE TABLE `selectcourse` (
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
-  `studentId` varchar(50) NOT NULL,
+  `studentId` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `studentNo` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL COMMENT '真实姓名',
   `school` varchar(50) NOT NULL,
   `college` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`studentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`studentId`),
+  KEY `studentId` (`studentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2141605 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('2141591', '王明月', '东华大学', '计算机科学与技术学院', '96e79218965eb72c92a549dd5a330112');
-INSERT INTO `student` VALUES ('2141604', '陆玉恒', '东华大学', '计算机科学与技术学院', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `student` VALUES ('00000000001', '2141591', '王明月', '东华大学', '计算机科学与技术学院', '96e79218965eb72c92a549dd5a330112');
+INSERT INTO `student` VALUES ('00000000002', '2141604', '陆玉恒', '东华大学', '计算机科学与技术学院', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- ----------------------------
 -- Table structure for submitrecord
@@ -150,15 +158,16 @@ CREATE TABLE `submitrecord` (
   `submitId` int(32) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `homeworkId` int(32) unsigned zerofill NOT NULL,
   `fileId` int(32) unsigned zerofill NOT NULL,
-  `studentId` varchar(50) NOT NULL,
+  `studentId` int(11) unsigned zerofill NOT NULL,
   `score` int(11) NOT NULL DEFAULT '0',
+  `time` datetime NOT NULL,
   PRIMARY KEY (`submitId`),
   KEY `submit_homeworkId` (`homeworkId`),
   KEY `submit_fileId` (`fileId`),
   KEY `submit_studentId` (`studentId`),
+  CONSTRAINT `submit_studentId` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `submit_fileId` FOREIGN KEY (`fileId`) REFERENCES `file` (`fileId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `submit_homeworkId` FOREIGN KEY (`homeworkId`) REFERENCES `homework` (`homeworkId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `submit_studentId` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `submit_homeworkId` FOREIGN KEY (`homeworkId`) REFERENCES `homework` (`homeworkId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -170,7 +179,8 @@ CREATE TABLE `submitrecord` (
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
-  `teacherId` varchar(50) NOT NULL,
+  `teacherId` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `teacherNo` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `school` varchar(50) NOT NULL,
   `college` varchar(50) NOT NULL,
@@ -179,8 +189,9 @@ CREATE TABLE `teacher` (
   `
 telephone` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`teacherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
+INSERT INTO `teacher` VALUES ('00000000001', '', '乐嘉锦', '东华大学', '计算机科学与技术学院', '1', null, null);

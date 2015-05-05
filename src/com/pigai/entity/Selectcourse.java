@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

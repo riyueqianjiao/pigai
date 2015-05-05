@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-4-26 23:48:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,10 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +25,8 @@ import javax.persistence.Table;
 @Table(name = "student", catalog = "pigai")
 public class Student implements java.io.Serializable {
 
-	private String studentId;
+	private Integer studentId;
+	private String studentNo;
 	private String name;
 	private String school;
 	private String college;
@@ -32,19 +37,19 @@ public class Student implements java.io.Serializable {
 	public Student() {
 	}
 
-	public Student(String studentId, String name, String school,
-			String college,  String password) {
-		this.studentId = studentId;
+	public Student(String studentNo, String name, String school,
+			String college, String password) {
+		this.studentNo = studentNo;
 		this.name = name;
 		this.school = school;
 		this.college = college;
 		this.password = password;
 	}
 
-	public Student(String studentId, String name, String school,
-			String college,  String password,
-			Set<Selectcourse> selectcourses, Set<Submitrecord> submitrecords) {
-		this.studentId = studentId;
+	public Student(String studentNo, String name, String school,
+			String college, String password, Set<Selectcourse> selectcourses,
+			Set<Submitrecord> submitrecords) {
+		this.studentNo = studentNo;
 		this.name = name;
 		this.school = school;
 		this.college = college;
@@ -54,13 +59,23 @@ public class Student implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "studentId", unique = true, nullable = false, length = 50)
-	public String getStudentId() {
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "studentId", unique = true, nullable = false)
+	public Integer getStudentId() {
 		return this.studentId;
 	}
 
-	public void setStudentId(String studentId) {
+	public void setStudentId(Integer studentId) {
 		this.studentId = studentId;
+	}
+
+	@Column(name = "studentNo", nullable = false, length = 50)
+	public String getStudentNo() {
+		return this.studentNo;
+	}
+
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
 	}
 
 	@Column(name = "name", nullable = false, length = 50)

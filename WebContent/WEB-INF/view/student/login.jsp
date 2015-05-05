@@ -15,7 +15,7 @@
                 <label>学号:</label> 
             </td> 
             <td> 
-                <input id="studentId" type="text" size="20" /> 
+                <input id="studentNo" type="text" size="20" /> 
             </td> 
         </tr> 
         <tr> 
@@ -37,13 +37,13 @@
 <script type="text/javascript">
 $().ready(function () {
 	$('#Login').click(function () {
-		var studentId = $('#studentId').val();
+		var studentNo = $('#studentNo').val();
 		var password = $('#password').val();
-		if (studentId == "" || password == "") {			
+		if (studentNo == "" || password == "") {			
 			alert("学名或密码不能为空！");
 		}
 		else {
-			var data = {"studentId":studentId,"password":password};
+			var data = {"studentNo":studentNo,"password":password};
 			$.ajax({
 				type: "post",
 				url: "login",

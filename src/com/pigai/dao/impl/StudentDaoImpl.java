@@ -13,15 +13,15 @@ import com.pigai.entity.Student;
 public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao{
 
 	@Override
-	public Student findStudentById(final String studentId) {
+	public Student findStudentById(final String studentNo) {
 		return getHibernateTemplate().execute(new HibernateCallback<Student>()
 				{
 					@Override
 					public Student doInHibernate(Session session)throws HibernateException
 					{
-						String hql="from Student where studentId=:studentId ";
+						String hql="from Student where studentNo=:studentNo ";
 						Query query=session.createQuery(hql);
-						query.setString("studentId",studentId);
+						query.setString("studentNo",studentNo);
 						Student student=(Student) query.uniqueResult();
 						return student;
 					}
@@ -30,15 +30,15 @@ public class StudentDaoImpl extends BaseDaoImpl<Student> implements StudentDao{
 	}
 
 	@Override
-	public Student findStudent(final String studentId, final String password) {
+	public Student findStudent(final String studentNo, final String password) {
 		return getHibernateTemplate().execute(new HibernateCallback<Student>()
 				{
 					@Override
 					public Student doInHibernate(Session session)throws HibernateException
 					{
-						String hql="from Student where studentId=:studentId and password=:password";
+						String hql="from Student where studentNo=:studentNo and password=:password";
 						Query query=session.createQuery(hql);
-						query.setString("studentId",studentId);
+						query.setString("studentNo",studentNo);
 						query.setString("password",password);
 						Student student=(Student) query.uniqueResult();
 						return student;
