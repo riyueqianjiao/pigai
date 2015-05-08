@@ -1,9 +1,12 @@
 package com.pigai.service;
 
-import org.springframework.stereotype.Service;
+import com.pigai.entity.Teacher;
 
-@Service
-public class TeacherService {
+
+public interface TeacherService extends BaseService<Teacher>{
 	
+public Teacher getTeacherByUsernameAndPwd(String username,String pwd);
+
+public Boolean isTeacherExisted(String teacherNo);
 
 }
