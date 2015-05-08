@@ -34,7 +34,7 @@ public class Course implements java.io.Serializable {
 	private Teacher teacher;
 	private String courseName;
 	private String courseIntr;
-	private Date time;
+	private Date time=new Date(System.currentTimeMillis());
 	private String teacherName;
 	private Set<Homework> homeworks = new HashSet<Homework>(0);
 	private Set<Courseware> coursewares = new HashSet<Courseware>(0);
