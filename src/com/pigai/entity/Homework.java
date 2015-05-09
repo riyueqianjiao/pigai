@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
+// Generated 2015-5-9 15:06:17 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -36,30 +36,30 @@ public class Homework implements java.io.Serializable {
 	private String introduction;
 	private int score;
 	private Date deadline;
-	private Date createtime;
+	private Date createTime;
 	private Set<Submitrecord> submitrecords = new HashSet<Submitrecord>(0);
 
 	public Homework() {
 	}
 
 	public Homework(Course course, String name, String introduction, int score,
-			Date deadline, Date createtime) {
+			Date deadline, Date createTime) {
 		this.course = course;
 		this.name = name;
 		this.introduction = introduction;
 		this.score = score;
 		this.deadline = deadline;
-		this.createtime = createtime;
+		this.createTime = createTime;
 	}
 
 	public Homework(Course course, String name, String introduction, int score,
-			Date deadline, Date createtime, Set<Submitrecord> submitrecords) {
+			Date deadline, Date createTime, Set<Submitrecord> submitrecords) {
 		this.course = course;
 		this.name = name;
 		this.introduction = introduction;
 		this.score = score;
 		this.deadline = deadline;
-		this.createtime = createtime;
+		this.createTime = createTime;
 		this.submitrecords = submitrecords;
 	}
 
@@ -122,13 +122,13 @@ public class Homework implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createtime", nullable = false, length = 19)
-	public Date getCreatetime() {
-		return this.createtime;
+	@Column(name = "createTime", nullable = false, length = 19)
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "homework")

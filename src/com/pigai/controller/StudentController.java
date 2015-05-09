@@ -71,9 +71,9 @@ public class StudentController {
 		return "student/info";
 	}
 	
-	@RequestMapping(value = "updatepassword")
+	@RequestMapping(value = "updatePassword")
 	public String updatepass(){
-		return "student/updatepassword";
+		return "student/updatePassword";
 	}
 	@RequestMapping(value = "updatepassword",method=RequestMethod.POST)
 	public void updatepass(HttpServletRequest request,HttpServletResponse response,String oldpassword,String newpassword) throws IOException{
@@ -106,5 +106,9 @@ public class StudentController {
 		List<Course> courses = studentService.findByKeyByPage(key, pageNum);
 		request.setAttribute("courses", courses);
 		return "student/search";
+	}
+	@RequestMapping(value = "selectCourse/{courseId}")
+	public void secelt(HttpServletRequest request,HttpServletResponse response,@PathVariable Integer courseId){
+		
 	}
 }

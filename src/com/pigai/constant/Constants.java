@@ -10,6 +10,6 @@ public class Constants{
    public static final String  REGISTER_SECCESS="注册成功";
    public static final String  UPDATE_SECCESS="更新成功";
    public static final Integer  PAGE_Size=10;
-public static final String EMPTY = "";
+   public static final String  EMPTY = "";
    
 }

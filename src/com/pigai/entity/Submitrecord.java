@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
+// Generated 2015-5-9 15:06:17 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 
@@ -28,22 +28,24 @@ import javax.persistence.TemporalType;
 public class Submitrecord implements java.io.Serializable {
 
 	private Integer submitId;
-	private File file;
+	private Fileinfo fileinfo;
 	private Homework homework;
 	private Student student;
 	private int score;
-	private Date time;
+	private Date createTime;
+	private String studentName;
 
 	public Submitrecord() {
 	}
 
-	public Submitrecord(File file, Homework homework, Student student,
-			int score, Date time) {
-		this.file = file;
+	public Submitrecord(Fileinfo fileinfo, Homework homework, Student student,
+			int score, Date createTime, String studentName) {
+		this.fileinfo = fileinfo;
 		this.homework = homework;
 		this.student = student;
 		this.score = score;
-		this.time = time;
+		this.createTime = createTime;
+		this.studentName = studentName;
 	}
 
 	@Id
@@ -59,12 +61,12 @@ public class Submitrecord implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fileId", nullable = false)
-	public File getFile() {
-		return this.file;
+	public Fileinfo getFileinfo() {
+		return this.fileinfo;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
+	public void setFileinfo(Fileinfo fileinfo) {
+		this.fileinfo = fileinfo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -97,13 +99,22 @@ public class Submitrecord implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "time", nullable = false, length = 19)
-	public Date getTime() {
-		return this.time;
+	@Column(name = "createTime", nullable = false, length = 19)
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	@Column(name = "studentName", nullable = false)
+	public String getStudentName() {
+		return this.studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
 }

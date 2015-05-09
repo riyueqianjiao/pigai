@@ -1,7 +1,7 @@
 package com.pigai.entity;
 
 // default package
-// Generated 2015-5-5 22:39:25 by Hibernate Tools 4.3.1
+// Generated 2015-5-9 15:06:17 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,8 +34,9 @@ public class Course implements java.io.Serializable {
 	private Teacher teacher;
 	private String courseName;
 	private String courseIntr;
-	private Date time=new Date(System.currentTimeMillis());
+	private Date createTime;
 	private String teacherName;
+	private byte finished;
 	private Set<Homework> homeworks = new HashSet<Homework>(0);
 	private Set<Courseware> coursewares = new HashSet<Courseware>(0);
 	private Set<Selectcourse> selectcourses = new HashSet<Selectcourse>(0);
@@ -43,22 +44,25 @@ public class Course implements java.io.Serializable {
 	public Course() {
 	}
 
-	public Course(Teacher teacher, String courseName, Date time,
-			String teacherName) {
+	public Course(Teacher teacher, String courseName, Date createTime,
+			String teacherName, byte finished) {
 		this.teacher = teacher;
 		this.courseName = courseName;
-		this.time = time;
+		this.createTime = createTime;
 		this.teacherName = teacherName;
+		this.finished = finished;
 	}
 
 	public Course(Teacher teacher, String courseName, String courseIntr,
-			Date time, String teacherName, Set<Homework> homeworks,
-			Set<Courseware> coursewares, Set<Selectcourse> selectcourses) {
+			Date createTime, String teacherName, byte finished,
+			Set<Homework> homeworks, Set<Courseware> coursewares,
+			Set<Selectcourse> selectcourses) {
 		this.teacher = teacher;
 		this.courseName = courseName;
 		this.courseIntr = courseIntr;
-		this.time = time;
+		this.createTime = createTime;
 		this.teacherName = teacherName;
+		this.finished = finished;
 		this.homeworks = homeworks;
 		this.coursewares = coursewares;
 		this.selectcourses = selectcourses;
@@ -104,13 +108,13 @@ public class Course implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "time", nullable = false, length = 19)
-	public Date getTime() {
-		return this.time;
+	@Column(name = "createTime", nullable = false, length = 19)
+	public Date getCreateTime() {
+		return this.createTime;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@Column(name = "teacherName", nullable = false, length = 50)
@@ -120,6 +124,15 @@ public class Course implements java.io.Serializable {
 
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+
+	@Column(name = "finished", nullable = false)
+	public byte getFinished() {
+		return this.finished;
+	}
+
+	public void setFinished(byte finished) {
+		this.finished = finished;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "course")

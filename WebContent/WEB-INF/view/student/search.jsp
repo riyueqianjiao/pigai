@@ -41,13 +41,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</c:when>
 		<c:otherwise>
 			<ul class="content-list">
-				<p>课程数量：${totalNum}
-				</p>
+				<p>课程数量：${totalNum}</p>				
 				<c:forEach var="course" items="${courses}">
 					<li>
 		         	   <i class="name-icon name-icon1">课程</i>	         
 		         	   <p class="detail">
-		            	    <span class="detail-l">课程名称：${course.courseName}</span>
+		            	    <span>课程名称：${course.courseName}</span>
+		            	    <span>任课老师：${course.teacherName}</span>
+		            	    <span><a href="<%=basePath%>/student/selectCourse/${course.courseId}"target="_blank">注册此课程</a></span>
 		            	    <%-- <span class="detail-c">任课老师：${course.teacher.name}</span> --%>
 		          	  </p>
 	       			 </li>

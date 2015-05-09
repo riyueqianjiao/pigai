@@ -15,7 +15,7 @@
                 <label>旧密码:</label> 
             </td> 
             <td> 
-                <input id="oldpassword" type="text" size="20" /> 
+                <input id="oldPassword" type="text" size="20" /> 
             </td> 
         </tr> 
         <tr> 
@@ -23,7 +23,7 @@
                 <label>新密码:</label> 
             </td> 
             <td> 
-                <input id="newpassword" type="text" size="20" /> 
+                <input id="newPassword" type="text" size="20" /> 
             </td> 
         </tr> 
         <tr> 
@@ -31,7 +31,7 @@
                 <label>新密码:</label> 
             </td> 
             <td> 
-                <input id="newpasswordagain" type="text" size="20" /> 
+                <input id="newPasswordAgain" type="text" size="20" /> 
             </td> 
         </tr>
         <tr align="right"> 
@@ -45,27 +45,27 @@
 <script type="text/javascript">
 $().ready(function () {
 	$('#Updatepass').click(function () {
-		var oldpassword = $('#oldpassword').val();
-		var newpassword = $('#newpassword').val();
-		var newpasswordagain = $('#newpasswordagain').val();
-		if (oldpassword == "") {			
+		var oldPassword = $('#oldPassword').val();
+		var newPassword = $('#newPassword').val();
+		var newPasswordagain = $('#newPasswordAgain').val();
+		if (oldPassword == "") {			
 			alert("旧密码不能为空！");
-		}else if(newpassword == ""){
+		}else if(newPassword == ""){
 			alert("新密码不能为空！");
-		}else if(newpasswordagain == ""){
+		}else if(newPasswordagain == ""){
 			alert("请再次输入新密码！");
-		}else if(newpassword != newpasswordagain){
+		}else if(newPassword != newPasswordagain){
 			alert("两次密码输入不一致！");
 		}
 		else {
-			var data = {"oldpassword":oldpassword,"newpassword":newpassword};
+			var data = {"oldPassword":oldPassword,"newPassword":newPassword};
 			$.ajax({
 				type: "post",
-				url: "updatepassword",
+				url: "updatePassword",
 				data: data,
 				success: function (msg) {
 					if (msg.status == true) {
-						location.href = "updatepassword"; //如果登录成功则跳到管理界面
+						location.href = "updatePassword"; //如果登录成功则跳到管理界面
 						alert(msg.message);
 					}
 					if (msg.status == false) {
