@@ -3,6 +3,6 @@ function delCourse(id){
 }
 
 function toCoursewares(id){
-	goWithUrl(basePath()+"/course/ware/"+id);
+	goWithUrl(basePath()+"/courseware/"+id);
 }
 
