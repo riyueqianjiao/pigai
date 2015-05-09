@@ -1,5 +1,5 @@
-function delCourse(id){
-	deleteData(basePath()+"/course/delete/"+id);
+function delCourseware(id){
+	deleteData(basePath()+"/courseware/delete/"+id);
 }
 
 function toCoursewares(id){

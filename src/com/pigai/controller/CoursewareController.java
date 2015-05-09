@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.pigai.entity.Course;
+import com.pigai.entity.Courseware;
 import com.pigai.entity.Teacher;
 import com.pigai.service.CourseService;
 import com.pigai.service.CoursewareService;
@@ -24,7 +25,7 @@ import com.pigai.vo.CourseCriteria;
 
 @Controller
 @RequestMapping(value = "/course")
-public class CourseController extends BaseController {
+public class CoursewareController extends BaseController {
 
 	@Autowired
 	@Qualifier("courseService")
@@ -67,42 +68,22 @@ public class CourseController extends BaseController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public void doAdd(HttpServletRequest request, HttpServletResponse response,
-			Course course) throws IOException {
+			Courseware courseware) throws IOException {
 		try {
 
-			Integer teacherId = Integer.parseInt(request
-					.getParameter("teacherId"));
-			Teacher teacher = teacherService.get(teacherId);
-			course.setTeacher(teacher);
-
-			if (CheckUtil.isEmpty(course.getCourseId())) {
-				courseService.add(course);
-			} else {
-				courseService.update(course);
-			}
-
+			Integer courseId = Integer.parseInt(request
+					.getParameter("courseId"));			
+			Course course = courseService.get(courseId);
+			courseware.setCourse(course);
+			courseService.add(course);
 			JSONUtil.outputSuccess("添加成功", response);
 		} catch (Exception e) {
-			JSONUtil.outputError("申请失败", response);
+			JSONUtil.outputError("添加失败", response);
 
 		}
 	}
 
-	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-	public String toDetail(@PathVariable("id") Integer id,
-			HttpServletRequest request) {
-
-		try {
-			request.setAttribute("course", courseService.get(id));
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-
-		return "course/detail";
-	}
-
-	@RequestMapping(value = "/ware/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String toCourseware(@PathVariable("id") Integer id,
 			HttpServletRequest request, PageModel pageModel) {
 
@@ -123,7 +104,7 @@ public class CourseController extends BaseController {
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		try {
-			courseService.delete(id);
+			coursewareService.delete(id);
 			JSONUtil.outputSuccess("删除成功", response);
 		} catch (Exception e) {
 			JSONUtil.outputError("申请失败", response);
