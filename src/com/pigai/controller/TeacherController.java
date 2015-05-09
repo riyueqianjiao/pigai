@@ -16,6 +16,7 @@ import com.pigai.entity.Teacher;
 import com.pigai.service.TeacherService;
 import com.pigai.util.EncryptionUtil;
 import com.pigai.util.JSONUtil;
+import com.pigai.util.UserType;
 import com.pigai.vo.User;
 
 @Controller
@@ -65,7 +66,8 @@ public class TeacherController extends BaseController {
 			if (teacher != null) {
 				JSONUtil.outputSuccess(Constants.LOGIN_SUCCESS, response);
 				User user = new User(teacher.getTeacherId(),
-						teacher.getTeacherNo(), teacher.getName());
+						teacher.getTeacherNo(), teacher.getName(),
+						UserType.TEACHER);
 				request.getSession().setAttribute("user", user);
 			} else {
 				JSONUtil.outputError(Constants.PASSWORD_IS_WRONG, response);
@@ -103,15 +105,14 @@ public class TeacherController extends BaseController {
 		if (teacher == null) {
 			JSONUtil.outputError(Constants.PASSWORD_IS_WRONG, response);
 		} else {
-			try {				
+			try {
 				teacher.setPassword(EncryptionUtil.MD5(newpassword));
 				teacherService.update(teacher);
-			} catch (Exception e) {				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			JSONUtil.outputSuccess(Constants.UPDATE_SECCESS, response);
 		}
 	}
-
 
 }

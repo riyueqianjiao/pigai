@@ -21,7 +21,7 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
 
 	<div class="w1000">
 
-		<jsp:include page="../common/navigation_menu.jsp" />
+		<jsp:include page="../common/navigation.jsp" />
 
 
 		<div class="cont">
