@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.pigai.entity.Course;
 import com.pigai.entity.Teacher;
 import com.pigai.service.CourseService;
+import com.pigai.service.CoursewareService;
 import com.pigai.service.TeacherService;
 import com.pigai.util.CheckUtil;
 import com.pigai.util.JSONUtil;
@@ -28,6 +29,10 @@ public class CourseController extends BaseController {
 	@Autowired
 	@Qualifier("courseService")
 	private CourseService courseService;
+
+	@Autowired
+	@Qualifier("coursewareService")
+	private CoursewareService coursewareService;
 
 	@Autowired
 	@Qualifier("teacherService")
@@ -95,6 +100,22 @@ public class CourseController extends BaseController {
 		}
 
 		return "course/detail";
+	}
+
+	@RequestMapping(value = "/ware/{id}", method = RequestMethod.GET)
+	public String toCourseware(@PathVariable("id") Integer id,
+			HttpServletRequest request, PageModel pageModel) {
+
+		try {
+			request.setAttribute("courseId", id);
+			pageModel = coursewareService.getPageModelByCourseId(pageModel, id);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return "courseware/index";
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
