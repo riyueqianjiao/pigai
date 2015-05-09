@@ -12,7 +12,7 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加课程</title>
+<title>课程介绍</title>
 <%@include file="../common/head.jsp"%>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/course.js"></script>
 </head>
@@ -27,22 +27,21 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
 		<div class="cont">
 			<div class="current-position">
 				<span class="font14"> 当前位置：<a href="${pageContext.request.contextPath }/">首页</a> &gt;&gt; 
-					<a href="${pageContext.request.contextPath }/course"> 课程</a> &gt;&gt; 课程添加 </span>
+					<a href="${pageContext.request.contextPath }/course"> 课程</a> &gt;&gt; 课程介绍 </span>
+					
 			</div>
 
 			<div class="repair_con mt10">
 				<div class="repair_title">
 					<ul>
-						<li class="current cur">课程${empty id?申请:修改 }</li>
+						<li class="current cur">课程详情</li>
+						<li  onclick="toCoursewares('${course.courseId}');">课件</li>
 					</ul>
 					<span class="back">
 						<a href="${from_url eq null ? pageContext.request.contextPath : from_url }">&lt;&lt;返回</a></span>
 				</div>
             <div class="repair_main">
-            
-				<form id="apply"
-					action="${pageContext.request.contextPath}/course/add"
-					method="post">
+            				
 					<c:if test="${empty id }">
 					<input type="hidden" name="courseId"  value="${id }" />
 					</c:if>
@@ -53,7 +52,7 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
 							带<font style="font-size: 16px; color: red;">*</font>号的为必填项
 						</p>
 						<dl>
-						<dt>申请工号 :</dt>
+						<dt>老师名称:</dt>
 							<dd>
 							<label>${CURRENTUSER.userNo }</label>
 							</dd>
@@ -62,22 +61,16 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
 						<dl>	
 							<dt>课程名称 :</dt>
 							<dd>
-							<input  name="courseName" placeholder="请在此输入有效课程名称"
-									class="repair-text" style="padding: 4px 0"
-									type="text" value="${course.courseName }"/>
-							</dd>
+							${course.courseName }
 						</dl>												
 						<dl>
 							<dt>课程介绍 :</dt>
 							<dd>
-								<textarea name="courseIntr" value="${course.courseIntr } placeholder="请在此输入备注信息"></textarea>
+								<textarea name="courseIntr"  placeholder="请在此输入备注信息">${course.courseIntr}</textarea>
 							</dd>
 						</dl>
-						<div class="submit-btn" style="margin-left: 86px;">
-							<a href="javascript:void(0);" onclick="applySubmit();">提交</a>
-						</div>
-						</div>
-				</form>
+						
+						</div>				
 			
 		</div>
 		</div>

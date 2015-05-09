@@ -38,8 +38,8 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
           <form id="form" action="${pageContext.request.contextPath}/course" method="post">
           <div class="repair_main">
               <div class="repair_search">         
-                    课程名称：<input type="text" name="courseName" value="${CourseCriteria.courseName }" class="repair_text"/>
-                    创建老师：<input type="text" name="teacherName" value="${CourseCriteria.teacherName }" class="repair_text"/>
+                    课程名称：<input type="text" name="courseName" value="${courseCriteria.courseName }" class="repair_text"/>
+                    创建老师：<input type="text" name="teacherName" value="${courseCriteria.teacherName }" class="repair_text"/>
                  <input type="button" value="搜索" onclick="$('#form').submit();"class="att_button" style="margin: 0"/>
                 </div>
                 
@@ -60,11 +60,17 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
               	 </tr>
               </c:if>
               <c:forEach items="${pageModel.pageData }" var="course" varStatus="status">
-               <tr<c:if test="${status.index % 2 == 1}"> class="row"</c:if>>                    	                                                   	                    								                   
+               <tr<c:if test="${status.index % 2 == 1}"> class="row"</c:if>> 
+               <td class="f_2">${course.courseId }</td>
+               <td class="f_2">${course.courseName }</td>
+               <td class="f_2">${course.teacherName }</td>
+               <td class="f_2"><fmt:formatDate value="${course.time }"
+											pattern="yyyy-MM-dd HH:mm" /></td>
+                                  	                                                   	                    								                  
                     	<td class="f_2">                                                        	                                                       
-                            	<a href="javascript:void(0);" onclick="editCourse('${course.courseId}');" title="编辑"><img src="${pageContext.request.contextPath }/images/edit.png" width="16" height="16" style="margin-right: 10px;" alt=""/></a>
+                            	<a href="javascript:void(0);"onclick="goWithUrl('${pageContext.request.contextPath }/course/add?id=${course.courseId}');"  title="编辑"><img src="${pageContext.request.contextPath }/images/edit.png" width="16" height="16" style="margin-right: 10px;" alt=""/></a>
                             	<a href="javascript:void(0);" onclick="delCourse('${course.courseId}');" title="删除"><img src="${pageContext.request.contextPath }/images/del.png" width="16" height="16" alt=""/></a>                            
-                            	<a href="javascript:void(0);" onclick="toCourseDetail('${course.courseId}');">查看</a>                            	                            	
+                            	<a href="javascript:void(0);" onclick="goWithUrl('${pageContext.request.contextPath }/course/detail/${course.courseId}');">查看</a>                            	                            	
                             </td>                            
                         </tr>   
              </c:forEach>
@@ -111,7 +117,7 @@ request.setAttribute("CURRENTUSER", request.getSession().getAttribute("user"));
              <div class="repair_info">
              	<ul>
              	
-                	<li><a href="javascript:void(0);" onclick="goWithUrl('${pageContext.request.contextPath}/course/add')">采购添加</a></li>                               	                	                
+                	<li><a href="javascript:void(0);" onclick="goWithUrl('${pageContext.request.contextPath}/course/add')">课程添加</a></li>                               	                	                
                 </ul>
              </div> 
                    
