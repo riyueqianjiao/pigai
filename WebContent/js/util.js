@@ -306,8 +306,8 @@ function batchDelete(url, iptName, paramName) {
 	} else {
 		if(confirm("确定删除选中的所有数据？")) {
 			deleteAjaxRequest(url, iptName + "=" + ids, function(result) {
-				alert(result.msg);
-				if(result.success == "true") {
+				alert(result.message);
+				if(result.status == "true") {
 					refreshAfterTime(3000);
 				}
 			});
@@ -322,8 +322,8 @@ function batchDelete(url, iptName, paramName) {
 function deleteData(url) {
 	if(confirm("确定删除该数据？")) {
 		deleteAjaxRequest(url, null, function(result) {
-			alert(result.msg);
-			if(result.success == "true") {
+			alert(result.message);
+			if(result.status == "true") {
 				refreshAfterTime(3000);
 			}
 		});
@@ -363,7 +363,7 @@ function uploadFile(callFunc) {
  */
 function deleteFile(fileId) {
 	deleteFileCallback(fileId, function(result) {
-		alert(result.msg);
+		alert(result.message);
 	});
 }
 
@@ -381,10 +381,10 @@ function deleteFileCallback(fileId, callback) {
  */
 function downloadFile(fileId) {
 	postAjaxRequest(platform_path + "/file/download/"+fileId,"",function(result){
-		if ("true" == result.success || true == result.success) {
-			go(result.msg);
+		if ("true" == result.status || true == result.status) {
+			go(result.message);
 		}else {
-			alert(result.msg);
+			alert(result.message);
 		}
 	});
 }

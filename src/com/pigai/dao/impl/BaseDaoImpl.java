@@ -93,7 +93,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		if (null != args) {
 			for (int i = 0; i < args.length; i++) {
 				if (null != args[i]) {
-					query.setParameter(i + 1, args[i]);
+					query.setParameter(i, args[i]);
 				}
 			}
 		}
@@ -145,7 +145,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		if (null != args) {
 			for (int i = 0; i < args.length; i++) {
 				if (null != args[i]) {
-					query.setParameter(i + 1, args[i]);
+					query.setParameter(i, args[i]);
 				}
 			}
 		}
