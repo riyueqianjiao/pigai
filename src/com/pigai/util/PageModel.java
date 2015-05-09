@@ -45,7 +45,7 @@ public class PageModel implements java.io.Serializable {
 	}
 
 	public int getOffset() {
-		return offset;
+		return (currentIndex-1)*pageSize;
 	}
 
 	public void setOffset(int offset) {
